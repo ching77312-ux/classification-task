@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>分類作業</title>
+  <style>
+    /* 全域基本樣式設定 */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+      background-color: #f5f6f8;
+      color: #222222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+    }
+
+    /* 主容器 */
+    #app {
+      background-color: #ffffff;
+      width: 100%;
+      max-width: 720px;
+      min-height: 85vh;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* 標題與文字排版 */
+    h1 {
+      font-size: 1.6rem;
+      text-align: center;
+      margin-bottom: 16px;
+      color: #111111;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      color: #222222;
+    }
+
+    p {
+      line-height: 1.6;
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+
+    /* 表單輸入與一般按鈕 */
+    .form-group {
+      margin: 20px 0;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+      user-select: text;
+      -webkit-user-select: text;
+    }
+
+    .primary-btn {
+      width: 100%;
+      padding: 16px;
+      font-size: 1.15rem;
+      font-weight: bold;
+      color: #ffffff;
+      background-color: #2563eb;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.15s;
+    }
+
+    .primary-btn:hover {
+      background-color: #1d4ed8;
+    }
+
+    .primary-btn:active {
+      background-color: #1e40af;
+    }
+
+    /* 測驗頂部左右類別標籤區 */
+    .header-labels {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    .side-box {
+      flex: 1;
+      background-color: #f9fafb;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .side-hint {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-bottom: 6px;
+    }
+
+    .cat-tag {
+      font-size: 1.15rem;
+      font-weight: bold;
+      line-height: 1.4;
+    }
+
+    .cat-concept {
+      color: #1d4ed8;
+    }
+
+    .cat-attribute {
+      color: #047857;
+    }
+
+    .cat-or {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin: 2px 0;
+    }
+
+    /* 區段規則說明頁 */
+    .instruction-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 20px 0;
+    }
+
+    .rule-summary {
+      background-color: #f8fafc;
+      border-left: 4px solid #2563eb;
+      padding: 16px;
+      margin: 16px 0;
+      border-radius: 4px;
+    }
+
+    /* 測驗刺激字詞呈現區 */
+    .stimulus-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 220px;
+      padding: 20px 0;
+    }
+
+    #stimulus-word {
+      font-size: 2.2rem;
+      font-weight: bold;
+      text-align: center;
+      padding: 16px 24px;
+      border-radius: 8px;
+    }
+
+    /* 錯誤提示樣式 */
+    #error-msg {
+      margin-top: 16px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #dc2626;
+      min-height: 2.2rem;
+      text-align: center;
+    }
+
+    /* 畫面下方左右大按鈕 */
+    .response-controls {
+      display: flex;
+      gap: 16px;
+      margin-top: auto;
+    }
+
+    .resp-btn {
+      flex: 1;
+      height: 88px;
+      font-size: 1.35rem;
+      font-weight: bold;
+      background-color: #e5e7eb;
+      color: #111827;
+      border: 2px solid #9ca3af;
+      border-radius: 12px;
+      cursor: pointer
